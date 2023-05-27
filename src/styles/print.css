@@ -1,0 +1,160 @@
+.title {
+  text-align: center;
+}
+
+.title__h2 {
+padding: 1.5rem 0;
+margin-block-end: unset;
+}
+
+.qrcode__field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.parent {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem;
+  height: 5cm;
+  align-items: center;
+}
+
+.main__content {
+  box-shadow: 0.1rem 0.1rem 0.5rem gray;
+  margin: 5% auto 1rem auto;
+  width: 600px;
+  height: 320px;
+}
+
+.printParent {
+  display: flex;
+  justify-content: center;
+}
+
+/* <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+ */
+
+ .print__btn {
+  width: 10cm;
+  padding: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.form__field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.1rem;
+  height: 25px;
+}
+
+.input__data {
+  border: 1px solid #e3dee0;
+  box-shadow: unset;
+  padding-inline-start: 3px;
+  width: 148px;
+  height: 23px;
+}
+
+.input__user {
+  padding: 0px 1.6px;
+  border: 1px solid #e3dee0;
+  box-shadow: unset;
+  height: 23px;
+}
+
+.print__btn {
+  padding: 10px 20px;
+  border: none;
+  font-size: 24px;
+  color: #000;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  transition: 0.5s;
+  transition-property: box-shadow;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.print__btn {
+  box-shadow: 0.1rem 0.1rem 0.5rem gray;
+  background-color: #fff;
+  width: 292px;
+}
+
+.print__btn:hover {
+  box-shadow: 0 0 5px #00000087, 0 0 5px #00000087, 0 0 5px #00000087, 0 0 25px #00000087;
+}
+
+.button__currentDate {
+  margin: 0 1rem;
+  background-color: #fff;
+  border: unset;
+  box-shadow: 0.1rem 0.1rem 0.5rem gray;
+  cursor: pointer;
+}
+
+@media print {
+  @page {
+    size: 10cm 5cm;
+    margin: 0;
+    padding: 0;
+  }
+
+  .parent {
+    margin: unset;
+    height: unset;
+  }
+  
+  .button__currentDate {
+    display: none;
+  }
+
+  .main__content {
+    margin: unset;
+    width: unset;
+    height: unset;
+    padding: 0.2rem;
+    box-shadow: unset;
+  }
+
+  .form__field {
+    font-size: 14px;
+    height: unset;
+  }
+
+  .printTitle, .printButton {
+    display: none;
+  }
+
+  @top-center {
+    content: "";
+  }
+
+  @bottom-center {
+    content: "";
+  }
+
+  .input__field {
+    width: 80px;
+    border: none;
+    border-bottom: 1px solid #000;
+  }
+
+  .input__data, .input__user {
+    width: 80px;
+    font-size: 14px;
+    height: unset;
+  }
+
+}
