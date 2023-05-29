@@ -34,13 +34,6 @@ margin-block-end: unset;
   justify-content: center;
 }
 
-.print__btn {
-  width: 10cm;
-  padding: 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
 .buttons {
   display: flex;
   justify-content: center;
@@ -71,7 +64,7 @@ margin-block-end: unset;
 }
 
 .print__btn {
-  padding: 10px 20px;
+  height: 50px;
   border: none;
   font-size: 24px;
   color: #000;
@@ -80,16 +73,36 @@ margin-block-end: unset;
   transition: 0.5s;
   transition-property: box-shadow;
   font-family: 'Times New Roman', Times, serif;
-}
-
-.print__btn {
+  cursor: pointer;
   box-shadow: 0.1rem 0.1rem 0.5rem gray;
   background-color: #fff;
-  width: 600px;
+  width: 455px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
 .print__btn:hover {
   box-shadow: 0 0 5px #00000087, 0 0 5px #00000087, 0 0 5px #00000087, 0 0 25px #00000087;
+}
+
+.printSize {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 24px;
+  border: none;
+  box-shadow: 0.1rem 0.1rem 0.5rem gray;
+  padding: 0 10px;
+  height: 50px;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.printSize:hover {
+  box-shadow: 0 0 5px #9f757587, 0 0 5px #9f757587, 0 0 5px #9f757587, 0 0 25px #9f757587;
 }
 
 .button__currentDate {
@@ -98,6 +111,7 @@ margin-block-end: unset;
   border: unset;
   box-shadow: 0.1rem 0.1rem 0.5rem gray;
   cursor: pointer;
+  padding: 5px 10px;
 }
 
 @media print {
@@ -151,6 +165,10 @@ margin-block-end: unset;
     width: 80px;
     font-size: 14px;
     height: unset;
+  }
+
+  .printSizeParent {
+    display: none;
   }
 
 }

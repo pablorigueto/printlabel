@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import QRCode from "qrcode.react";
 import EtiquetaForm from "./Form/EtiquetaForm";
 import styles from "./styles/print.css";
+import { MdSettings } from 'react-icons/md';
+import { MdPrint } from 'react-icons/md';
 
 function App() {
   const [dataOperacao, setDataOperacao] = useState("");
@@ -16,6 +18,7 @@ function App() {
   const [quantidade, setQuantidade] = useState("");
   const [qrCodeValue, setQRCodeValue] = useState("");
   const [shouldPrint, setShouldPrint] = useState(false);
+  const [printSize, setPrintSize] = useState("10cm 5cm");
 
   useEffect(() => {
     const handleBeforePrint = () => {
@@ -122,9 +125,33 @@ function App() {
     pesoProduto,
   ]);
 
+  useEffect(() => {
+    const printStyles = `
+      @media print {
+        @page {
+          size: ${printSize};
+          margin: 0;
+          padding: 0;
+        }
+      }
+    `;
+
+    // Add the printStyles to the <style> tag
+    const styleElement = document.createElement("style");
+    styleElement.innerHTML = printStyles;
+    document.head.appendChild(styleElement);
+  }, [printSize]);
+
+  const handlePrintSizeChange = () => {
+    const newSize = prompt("Digite o tamanho desejado para imprimir ex: 10cm 5cm");
+    setPrintSize(newSize);
+  };
+
+
   return (
     <>
       <div className="main__content">
+
         {/* Title field */}
         <div className="title printTitle">
           <h2 className="title__h2">ETIQUETA DE ESTOQUE</h2>
@@ -171,14 +198,24 @@ function App() {
         {/* Print button */}
         <div className="printParent">
           <div className="printButton">
-            <input
-              type="submit"
-              value="Imprimir"
+          
+            <button
               className="print__btn"
               onClick={handleSubmit}
-            />
+            >
+            <MdPrint /> Imprimir
+            </button>
           </div>
         </div>
+
+         {/* Change print size button */}
+         <div className="printSizeParent">
+          <button className="printSize"
+            onClick={handlePrintSizeChange}>
+            <MdSettings /> Etiqueta
+          </button>
+         </div>
+
       </div>
     </>
   );
