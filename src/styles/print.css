@@ -34,11 +34,7 @@ margin-block-end: unset;
   justify-content: center;
 }
 
-/* <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
- */
-
- .print__btn {
+.print__btn {
   width: 10cm;
   padding: 1rem;
   font-size: 1rem;
@@ -89,7 +85,7 @@ margin-block-end: unset;
 .print__btn {
   box-shadow: 0.1rem 0.1rem 0.5rem gray;
   background-color: #fff;
-  width: 292px;
+  width: 600px;
 }
 
 .print__btn:hover {

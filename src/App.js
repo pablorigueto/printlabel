@@ -62,24 +62,33 @@ function App() {
     setQuantidade(calculatedQuantidade);
   };
   
+  // const generateQRCodeData = () => {
+  //   const { calculatedPesoLiquido, calculatedQuantidade } = calculatePesoLiquidoAndQuantidade();
+
+  //   const jsonData = {
+  //     dataOperacao,
+  //     oPNumber,
+  //     nroGaiola,
+  //     pesoGaiola,
+  //     pesoTotal,
+  //     codProduto,
+  //     pesoProduto,
+  //     pesoLiquido: calculatedPesoLiquido,
+  //     quantidade: calculatedQuantidade,
+  //   };
+
+  //   const texto_livre = `${dataOperacao} ${oPNumber} ${nroGaiola} ${pesoGaiola} ${pesoTotal} ${codProduto} ${pesoProduto} ${calculatedPesoLiquido} ${calculatedQuantidade}`;
+  
+  //   return `${texto_livre}\n\n${JSON.stringify(jsonData, null, 2)}`;
+
+  // };
+
   const generateQRCodeData = () => {
     const { calculatedPesoLiquido, calculatedQuantidade } = calculatePesoLiquidoAndQuantidade();
 
-    const jsonData = {
-      dataOperacao,
-      oPNumber,
-      nroGaiola,
-      pesoGaiola,
-      pesoTotal,
-      codProduto,
-      pesoProduto,
-      pesoLiquido: calculatedPesoLiquido,
-      quantidade: calculatedQuantidade,
-    };
+    const texto_livre = `${dataOperacao}\t  ${oPNumber}\t ${nroGaiola}\t  ${pesoGaiola}\t ${pesoTotal}\t  ${codProduto}\t ${pesoProduto}\t  ${calculatedPesoLiquido}\t  ${calculatedQuantidade}`;
 
-    const texto_livre = `${dataOperacao} ${oPNumber} ${nroGaiola} ${pesoGaiola} ${pesoTotal} ${codProduto} ${pesoProduto} ${calculatedPesoLiquido} ${calculatedQuantidade}`;
-  
-    return `${texto_livre}\n\n${JSON.stringify(jsonData, null, 2)}`;
+    return texto_livre;
 
   };
 
@@ -148,7 +157,7 @@ function App() {
 
       <div className="buttons">
         {/* Update QR Code */}
-        <div className="printParent">
+        {/* <div className="printParent">
           <div className="printButton">
             <input
               type="button"
@@ -157,7 +166,7 @@ function App() {
               onClick={updateQrCode}
             />
           </div>
-        </div>
+        </div> */}
 
         {/* Print button */}
         <div className="printParent">
