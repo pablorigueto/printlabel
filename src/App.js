@@ -17,8 +17,8 @@ function App() {
   const [fila, setFila] = useState("");
   const [bloco, setBloco] = useState("");
 
-  const [pesoLiquido, setPesoLiquido] = useState("");
-  const [quantidade, setQuantidade] = useState("");
+  const [pesoLiquido, setPesoLiquido] = useState(0);
+  const [quantidade, setQuantidade] = useState(0);
   const [qrCodeValue, setQRCodeValue] = useState("");
   const [shouldPrint, setShouldPrint] = useState(false);
   const [printSize, setPrintSize] = useState("10cm 5cm");
@@ -65,8 +65,20 @@ function App() {
   const calcularPesoLiquido = () => {
     const { calculatedPesoLiquido, calculatedQuantidade } = calculatePesoLiquidoAndQuantidade();
   
-    setPesoLiquido(calculatedPesoLiquido);
-    setQuantidade(calculatedQuantidade);
+    if (!isNaN(calculatedPesoLiquido)) {
+      setPesoLiquido(calculatedPesoLiquido);
+    }
+    else {
+      setPesoLiquido('');
+    }
+  
+    if (!isNaN(calculatedQuantidade)) {
+      setQuantidade(calculatedQuantidade);
+    }
+    else {
+      setQuantidade('');
+    }
+
   };
 
   const generateQRCodeData = () => {
@@ -165,10 +177,20 @@ function App() {
     <>
       <div className="main__content">
 
-        {/* Title field */}
-        <div className="title printTitle">
-          <h2 className="title__h2">ETIQUETA DE ESTOQUE</h2>
-        </div>
+         <div className="printSizeParent">
+
+          {/* Title field */}
+          <div className="title printTitle">
+            <h2 className="title__h2">ETIQUETA DE ESTOQUE</h2>
+          </div>
+
+          {/* Change print size button */}
+          <button className="printSize"
+            onClick={handlePrintSizeChange}>
+            <MdSettings />
+          </button>
+
+         </div>
 
         {/* Parent fields and QR Code */}
         <div className="parent">
@@ -218,15 +240,6 @@ function App() {
             <MdCloudDownload /> Download
           </button>
         </div>
-
-         {/* Change print size button */}
-         <div className="printSizeParent">
-          <button className="printSize"
-            onClick={handlePrintSizeChange}>
-            <MdSettings /> Etiqueta
-          </button>
-         </div>
-
       </div>
     </>
   );

@@ -3,8 +3,8 @@
 }
 
 .title__h2 {
-padding: 1.5rem 0;
-margin-block-end: unset;
+  padding: 0 0 1.5rem 0;
+  margin-block-end: unset;
 }
 
 .qrcode__field {
@@ -64,7 +64,8 @@ margin-block-end: unset;
   box-shadow: unset;
   padding-inline-start: 3px;
   width: 148px;
-  height: 23px;
+  height: 25px;
+  margin-bottom: 0.2rem;
 }
 
 .input__user {
@@ -87,7 +88,7 @@ margin-block-end: unset;
   cursor: pointer;
   box-shadow: 0.1rem 0.1rem 0.5rem gray;
   background-color: #fff;
-  width: 292px;
+  width: 435px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -112,9 +113,9 @@ margin-block-end: unset;
   cursor: pointer;
 }
 
-.printSize:hover {
+/* .printSize:hover {
   box-shadow: 0 0 5px #9f757587, 0 0 5px #9f757587, 0 0 5px #9f757587, 0 0 25px #9f757587;
-}
+} */
 
 .download__btn:hover {
   box-shadow: 0 0 5px #9f757587, 0 0 5px #c1e2ba87, 0 0 5px #c1e2ba87, 0 0 25px #c1e2ba87;
@@ -127,6 +128,28 @@ margin-block-end: unset;
   box-shadow: 0.1rem 0.1rem 0.5rem gray;
   cursor: pointer;
   padding: 5px 10px;
+}
+
+.printSizeParent {
+  display: grid;
+  grid-template-columns: 540px 60px;
+}
+
+.printTitle {
+  margin-left: 60px;
+}
+
+.printSize {
+  box-shadow: unset;
+  justify-content: center;
+  padding-top: 1rem;
+  font-size: 26px;
+}
+
+#quantidade, #peso_liquido {
+  border: 1px solid #e3dee0;
+  height: 21px;
+  background: #f1f2f3;
 }
 
 @media print {
@@ -172,10 +195,11 @@ margin-block-end: unset;
     content: "";
   }
 
-  .input__field {
+  .input__field, #peso_liquido, #quantidade {
     width: 80px;
     border: none;
     border-bottom: 1px solid #000;
+    height: unset;
   }
 
   .input__data, .input__user {

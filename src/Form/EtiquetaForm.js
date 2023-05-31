@@ -146,32 +146,30 @@ function EtiquetaForm({
         </div>
 
         <div className="form__field">
-            <label htmlFor="fila">Fila:</label>
-            <input
-              type="text"
-              id="fila"
-              name="fila"
-              required
-              className="input__user input__field"
-              value={fila}  // Use the value from props
-              onChange={(e) => setFila(e.target.value)}
-            />
-          </div>
+          <label htmlFor="fila">Fila:</label>
+          <input
+            type="text"
+            id="fila"
+            name="fila"
+            required
+            className="input__user input__field"
+            value={fila}  // Use the value from props
+            onChange={(e) => setFila(e.target.value)}
+          />
+        </div>
 
-          <div className="form__field">
-            <label htmlFor="bloco">Bloco:</label>
-            <input
-              type="text"
-              id="bloco"
-              name="bloco"
-              required
-              className="input__user input__field"
-              value={bloco}  // Use the value from props
-              onChange={(e) => setBloco(e.target.value)}
-            />
-          </div>
-
- 
+        <div className="form__field">
+          <label htmlFor="bloco">Bloco:</label>
+          <input
+            type="text"
+            id="bloco"
+            name="bloco"
+            required
+            className="input__user input__field"
+            value={bloco}  // Use the value from props
+            onChange={(e) => setBloco(e.target.value)}
+          />
+        </div>
 
         <div className="form__field">
           <label htmlFor="peso_liquido">Peso Liquido:</label>
@@ -182,6 +180,7 @@ function EtiquetaForm({
             className="input__user} input__field"
             value={pesoLiquido}
             onChange={(e) => setPesoProduto(e.target.value)}
+            readOnly
           />
         </div>
 
@@ -194,8 +193,10 @@ function EtiquetaForm({
             className="input__user} input__field"
             value={quantidade}
             onChange={(e) => setQuantidade(e.target.value)}
+            readOnly
             />
         </div>
+
       </form>
     </div>
     </>
