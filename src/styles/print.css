@@ -132,11 +132,7 @@
 
 .printSizeParent {
   display: grid;
-  grid-template-columns: 540px 60px;
-}
-
-.printTitle {
-  margin-left: 60px;
+  grid-template-columns: 80px 440px 80px;
 }
 
 .printSize {
@@ -150,6 +146,14 @@
   border: 1px solid #e3dee0;
   height: 21px;
   background: #f1f2f3;
+}
+
+.logotipo {
+  background: url(../../assets/logotipo-small.png);
+  border: none;
+  background-repeat: no-repeat;
+  margin-top: 14px;
+  margin-left: 20px;
 }
 
 @media print {

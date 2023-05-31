@@ -179,6 +179,10 @@ function App() {
 
          <div className="printSizeParent">
 
+          {/* Logotipo */}
+          <button className="logotipo">
+          </button>
+
           {/* Title field */}
           <div className="title printTitle">
             <h2 className="title__h2">ETIQUETA DE ESTOQUE</h2>
