@@ -14,19 +14,30 @@ margin-block-end: unset;
 }
 
 .parent {
-  display: flex;
+  /* display: flex;
   justify-content: center;
   gap: 1rem;
   margin: 1rem;
   height: 5cm;
+  align-items: center; */
+  display: grid;
+  grid-template-columns: 63% 37%;
+  grid-gap: 1rem;
+  margin: 1rem;
+  justify-items: center;
   align-items: center;
+}
+
+.parent .qrcode__field .qrcode {
+  width: 150px !important;
+  height: 150px !important;
 }
 
 .main__content {
   box-shadow: 0.1rem 0.1rem 0.5rem gray;
   margin: 5% auto 1rem auto;
   width: 600px;
-  height: 320px;
+  height: 400px;
 }
 
 .printParent {
@@ -76,7 +87,7 @@ margin-block-end: unset;
   cursor: pointer;
   box-shadow: 0.1rem 0.1rem 0.5rem gray;
   background-color: #fff;
-  width: 455px;
+  width: 292px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,7 +98,7 @@ margin-block-end: unset;
   box-shadow: 0 0 5px #00000087, 0 0 5px #00000087, 0 0 5px #00000087, 0 0 25px #00000087;
 }
 
-.printSize {
+.printSize, .download__btn {
   display: flex;
   align-items: center;
   background-color: #fff;
@@ -103,6 +114,10 @@ margin-block-end: unset;
 
 .printSize:hover {
   box-shadow: 0 0 5px #9f757587, 0 0 5px #9f757587, 0 0 5px #9f757587, 0 0 25px #9f757587;
+}
+
+.download__btn:hover {
+  box-shadow: 0 0 5px #9f757587, 0 0 5px #c1e2ba87, 0 0 5px #c1e2ba87, 0 0 25px #c1e2ba87;
 }
 
 .button__currentDate {
@@ -124,6 +139,8 @@ margin-block-end: unset;
   .parent {
     margin: unset;
     height: unset;
+    display: flex;
+    justify-content: space-between;
   }
   
   .button__currentDate {
@@ -139,7 +156,7 @@ margin-block-end: unset;
   }
 
   .form__field {
-    font-size: 14px;
+    font-size: 10px;
     height: unset;
   }
 
@@ -163,11 +180,11 @@ margin-block-end: unset;
 
   .input__data, .input__user {
     width: 80px;
-    font-size: 14px;
+    font-size: 10px;
     height: unset;
   }
 
-  .printSizeParent {
+  .printSizeParent, .downloadButton {
     display: none;
   }
 
