@@ -1,81 +1,69 @@
-.title {
-  text-align: center;
+@font-face {
+  font-family: 'Biome';
+  src: url('../fonts/Biome-W01-Regular-1.ttf') format('truetype');
 }
 
-.title__h2 {
-  padding: 0 0 1.5rem 0;
-  margin-block-end: unset;
+body {
+  font-family: 'Biome';
 }
 
-.qrcode__field {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.parent {
-  /* display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin: 1rem;
-  height: 5cm;
-  align-items: center; */
-  display: grid;
-  grid-template-columns: 63% 37%;
-  grid-gap: 1rem;
-  margin: 1rem;
-  justify-items: center;
-  align-items: center;
-}
-
-.parent .qrcode__field .qrcode {
-  width: 150px !important;
-  height: 150px !important;
-}
-
-.main__content {
+.main_structure {
+  width: 600px;
+  padding: 1rem 3rem 1.4rem 3rem;
   box-shadow: 0.1rem 0.1rem 0.5rem gray;
   margin: 5% auto 1rem auto;
-  width: 600px;
-  height: 400px;
 }
 
-.printParent {
-  display: flex;
-  justify-content: center;
+.topHead {
+  display: grid;
+  grid-template-columns: 60px 1fr 60px;
+  grid-gap: 1rem;
 }
 
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
+.iniFields {
+  padding: 1rem 0 1.5rem 0;
 }
 
-.form__field {
+.data__grid {
+  display: grid;
+  grid-template-columns: 7% 18% 1fr;
+  gap: 2.67rem;
+  height: 35px;
+  padding-bottom: 0.2rem;
+}
+
+.data__button {
+  cursor: pointer;
+  box-shadow: 0.1rem 0.1rem 0.5rem gray;
+  background-color: #fff;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.1rem;
-  height: 25px;
+  justify-content: center;
+  border: unset;
+}
+.logotipo {
+  background: url(../../assets/logotipo-small.png);
+  border: none;
+  background-repeat: no-repeat;
+  margin-top: 14px;
 }
 
-.input__data {
-  border: 1px solid #e3dee0;
-  box-shadow: unset;
-  padding-inline-start: 3px;
-  width: 148px;
-  height: 25px;
-  margin-bottom: 0.2rem;
+.grid {
+  display: grid;
+  grid-template-columns: 23.5% 1fr;
+  gap: 5.9rem;
+  height: 35px;
+  padding-bottom: 0.2rem;
 }
 
-.input__user {
-  padding: 0px 1.6px;
-  border: 1px solid #e3dee0;
-  box-shadow: unset;
-  height: 23px;
+.parentPrintBtn, .downloadButton { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.print__btn {
+.printBtn {
+  width: 451px;
   height: 50px;
   border: none;
   font-size: 24px;
@@ -83,137 +71,123 @@
   letter-spacing: 4px;
   text-transform: uppercase;
   transition: 0.5s;
-  transition-property: box-shadow;
-  font-family: 'Times New Roman', Times, serif;
+  transition-property: box-shadow; 
   cursor: pointer;
   box-shadow: 0.1rem 0.1rem 0.5rem gray;
   background-color: #fff;
-  width: 435px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  gap: 0.3rem;
 }
 
-.print__btn:hover {
+.download__btn {
+  width: 230px;
+  height: 50px;
+  border: none;
+  font-size: 24px;
+  color: #000;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  transition: 0.5s;
+  transition-property: box-shadow; 
+  cursor: pointer;
+  box-shadow: 0.1rem 0.1rem 0.5rem gray;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.titleH2 {
+  text-align: center;
+}
+
+.printBtn:hover {
   box-shadow: 0 0 5px #00000087, 0 0 5px #00000087, 0 0 5px #00000087, 0 0 25px #00000087;
 }
 
-.printSize, .download__btn {
+.grid input {
+  font-size: 14px;
+  padding: 0 0.3rem;
+}
+
+.currentDate {
+  grid-template-columns: 9% 13.6% 1fr;
+  grid-gap: 0.5rem;
+}
+
+.btnCurrentDate {
+  cursor: pointer;
+  box-shadow: 0.1rem 0.1rem 0.5rem gray;
+  background: #fff;
+  border: unset;
+  height: 33px;
+}
+
+.toPrint {
+  /* break-after: always; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 10cm;
+  height: 5cm;
+  margin: 2rem auto;
+  box-shadow: 0.1rem 0.1rem 0.5rem gray;
+  padding: 0.5rem;
+}
+
+.toPrint span {
+  border-bottom: 2px solid #000;
+}
+
+.field {
+  display: grid;
+  grid-template-columns: 88px 230px;
+  font-size: 12px;
+}
+
+label {
   display: flex;
   align-items: center;
-  background-color: #fff;
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 24px;
-  border: none;
-  box-shadow: 0.1rem 0.1rem 0.5rem gray;
-  padding: 0 10px;
-  height: 50px;
-  gap: 5px;
-  cursor: pointer;
 }
 
-/* .printSize:hover {
-  box-shadow: 0 0 5px #9f757587, 0 0 5px #9f757587, 0 0 5px #9f757587, 0 0 25px #9f757587;
-} */
-
-.download__btn:hover {
-  box-shadow: 0 0 5px #9f757587, 0 0 5px #c1e2ba87, 0 0 5px #c1e2ba87, 0 0 25px #c1e2ba87;
+.qrcode canvas {
+  width: 50px !important;
+  height: 50px !important;
 }
 
-.button__currentDate {
-  margin: 0 1rem;
-  background-color: #fff;
-  border: unset;
-  box-shadow: 0.1rem 0.1rem 0.5rem gray;
-  cursor: pointer;
-  padding: 5px 10px;
-}
-
-.printSizeParent {
-  display: grid;
-  grid-template-columns: 80px 440px 80px;
-}
-
-.printSize {
-  box-shadow: unset;
+.bottom_buttons {
+  display: flex;
   justify-content: center;
-  padding-top: 1rem;
-  font-size: 26px;
-}
-
-#quantidade, #peso_liquido {
-  border: 1px solid #e3dee0;
-  height: 21px;
-  background: #f1f2f3;
-}
-
-.logotipo {
-  background: url(../../assets/logotipo-small.png);
-  border: none;
-  background-repeat: no-repeat;
-  margin-top: 14px;
-  margin-left: 20px;
+  gap: 1rem;
 }
 
 @media print {
   @page {
     size: 10cm 5cm;
     margin: 0;
+  }
+
+  .main_structure, .parentPrintBtn, .main_structure, .downloadButton {
+    display: none;
+  }
+
+  .qrcode {
+    margin-right: 0.5rem;
+  }
+
+  .toPrint {
+    margin-bottom: 0.2rem;
+    margin-top: unset !important;
+    padding: unset;
+    box-shadow: unset;
+    page-break-after: always;
+  }
+
+  .renderItemsToPrint {
+    margin-top: -8px;
     padding: 0;
   }
-
-  .parent {
-    margin: unset;
-    height: unset;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .button__currentDate {
-    display: none;
-  }
-
-  .main__content {
-    margin: unset;
-    width: unset;
-    height: unset;
-    padding: 0.2rem;
-    box-shadow: unset;
-  }
-
-  .form__field {
-    font-size: 10px;
-    height: unset;
-  }
-
-  .printTitle, .printButton {
-    display: none;
-  }
-
-  @top-center {
-    content: "";
-  }
-
-  @bottom-center {
-    content: "";
-  }
-
-  .input__field, #peso_liquido, #quantidade {
-    width: 80px;
-    border: none;
-    border-bottom: 1px solid #000;
-    height: unset;
-  }
-
-  .input__data, .input__user {
-    width: 80px;
-    font-size: 10px;
-    height: unset;
-  }
-
-  .printSizeParent, .downloadButton {
-    display: none;
-  }
-
 }

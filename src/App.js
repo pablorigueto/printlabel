@@ -1,56 +1,30 @@
 import React, { useState, useEffect } from "react";
-import QRCode from "qrcode.react";
-import EtiquetaForm from "./Form/EtiquetaForm";
-import styles from "./styles/print.css";
-import { MdSettings, MdPrint, MdCloudDownload } from 'react-icons/md';
+import QRCode from 'qrcode.react';
+import styles from './styles/print.css'
+import { MdPrint, MdCloudDownload } from 'react-icons/md';
 import axios from 'axios';
 
 function App() {
-  const [dataOperacao, setDataOperacao] = useState("");
-  const [oPNumber, setOPNumber] = useState("");
-  const [nroGaiola, setNroGaiola] = useState("");
-  const [pesoGaiola, setPesoGaiola] = useState("");
-  const [pesoTotal, setPesoTotal] = useState("");
-  const [codProduto, setCodProduto] = useState("");
+  const [op, setOp] = useState('');
+  const [nroGaiola, setNroGaiola] = useState('');
+  const [pesoGaiola, setPesoGaiola] = useState('');
+  const [pesoTotal, setPesoTotal] = useState('');
+  const [codProduto, setCodProduto] = useState('');
+  const [currentDate, setCurrentDate] = useState("");
   const [pesoProduto, setPesoProduto] = useState("");
-
   const [fila, setFila] = useState("");
   const [bloco, setBloco] = useState("");
+  const [pesoLiquido, setPesoLiquido] = useState("");
+  const [quantidade, setQuantidade] = useState("");
 
-  const [pesoLiquido, setPesoLiquido] = useState(0);
-  const [quantidade, setQuantidade] = useState(0);
-  const [qrCodeValue, setQRCodeValue] = useState("");
-  const [shouldPrint, setShouldPrint] = useState(false);
-  const [printSize, setPrintSize] = useState("10cm 5cm");
-
-
-  useEffect(() => {
-    const handleBeforePrint = () => {
-      const title = document.querySelector(".title h2");
-      const printingInput = document.querySelector(".printButton");
-      if (printingInput) {
-        printingInput.style.display = "none";
-        title.style.display = "none";
-      }
-    };
-
-    const handleAfterPrint = () => {
-      const title = document.querySelector(".title h2");
-      const printingInput = document.querySelector(".printButton");
-      if (printingInput) {
-        printingInput.style.display = "block";
-        title.style.display = "block";
-      }
-    };
-
-    window.addEventListener("beforeprint", handleBeforePrint);
-    window.addEventListener("afterprint", handleAfterPrint);
-
-    return () => {
-      window.removeEventListener("beforeprint", handleBeforePrint);
-      window.removeEventListener("afterprint", handleAfterPrint);
-    };
-  }, []);
+  const getCurrentDate = () => {
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, "0");
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const year = now.getFullYear();
+    const formattedDate = `${day}/${month}/${year}`;
+    setCurrentDate(formattedDate);
+  };
 
   const calculatePesoLiquidoAndQuantidade = () => {
     const parsedPesoGaiola = parseFloat(pesoGaiola);
@@ -62,6 +36,14 @@ function App() {
     return { calculatedPesoLiquido, calculatedQuantidade };
   };
   
+  useEffect(() => {
+    calcularPesoLiquido();
+  }, [
+    pesoGaiola,
+    pesoTotal,
+    pesoProduto,
+  ]);
+
   const calcularPesoLiquido = () => {
     const { calculatedPesoLiquido, calculatedQuantidade } = calculatePesoLiquidoAndQuantidade();
   
@@ -78,39 +60,61 @@ function App() {
     else {
       setQuantidade('');
     }
-
   };
 
   const generateQRCodeData = () => {
-    const { calculatedPesoLiquido, calculatedQuantidade } = calculatePesoLiquidoAndQuantidade();
-
-    const texto_livre = `${dataOperacao}\t  ${oPNumber}\t ${nroGaiola}\t  ${pesoGaiola}\t ${pesoTotal}\t  ${codProduto}\t ${pesoProduto}\t  ${fila}\t  ${bloco}\t  ${calculatedPesoLiquido}\t  ${calculatedQuantidade}`;
-
-    return texto_livre;
-
+    return `${currentDate}, ${op}, ${nroGaiola}, ${pesoGaiola}, ${pesoTotal}, ${codProduto}, ${pesoProduto}, ${fila}, ${bloco}, ${pesoLiquido}, ${quantidade}`;
   };
-  
-  useEffect(() => {
-    if (qrCodeValue !== '' && shouldPrint) {
-      window.print();
-      setShouldPrint(false);
-    }
-  }, [qrCodeValue, shouldPrint]);
 
-  const updateQrCode = (event) => {
-    event.preventDefault();
-    const qrCodeData = generateQRCodeData();
-    setQRCodeValue(qrCodeData);
+  const renderItemsToPrint = () => {
+    return (
+      <div className='toPrint'>
+        <div>
+          <div className="field"><label>Data:</label><span className="data"> {currentDate}</span></div>
+          <div className="field"><label>OP:</label><span className="op"> {op}</span></div>
+          <div className="field"><label>Nº Gaiola:</label><span> {nroGaiola}</span></div>
+          <div className="field"><label>Peso Gaiola:</label><span> {pesoGaiola}</span></div>
+          <div className="field"><label>Peso Total:</label><span> {pesoTotal}</span></div>
+          <div className="field"><label>Cod. Produto:</label><span> {codProduto}</span></div>
+          <div className="field"><label>Peso Produto:</label><span> {pesoProduto}</span></div>
+          <div className="field"><label>Fila:</label><span> {fila}</span></div>
+          <div className="field"><label>Bloco:</label><span> {bloco}</span></div>
+          <div className="field"><label>Peso Liquido:</label><span> {pesoLiquido}</span></div>
+          <div className="field"><label>Quantidade:</label><span> {quantidade}</span></div>
+        </div>
+        <div className="qrcode">
+          <QRCode value={generateQRCodeData()} />
+        </div>
+      </div>
+    );
+  };
+
+  const handlePrint = () => {
+    window.print();
+    resetForm();
+  };
+
+  const resetForm = () => {
+    setCurrentDate('');
+    setOp('');
+    setNroGaiola('');
+    setPesoGaiola('');
+    setPesoTotal('');
+    setCodProduto('');
+    setPesoProduto('');
+    setFila('');
+    setBloco('');
+    setPesoLiquido('');
+    setQuantidade('');
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setShouldPrint(true);
-    updateQrCode(event);
+    handlePrint();
   
     const data = {
-      "Data": dataOperacao,
-      "OP": oPNumber,
+      "Data": currentDate,
+      "OP": op,
       "Nro da Gaiola": nroGaiola,
       "Peso da Gaiola": pesoGaiola,
       "Peso Total": pesoTotal,
@@ -139,112 +143,98 @@ function App() {
     downloadLink.click();
   };
 
-  useEffect(() => {
-    calcularPesoLiquido();
-  }, [
-    dataOperacao,
-    oPNumber,
-    nroGaiola,
-    pesoGaiola,
-    pesoTotal,
-    codProduto,
-    pesoProduto,
-  ]);
-
-  useEffect(() => {
-    const printStyles = `
-      @media print {
-        @page {
-          size: ${printSize};
-          margin: 0;
-          padding: 0;
-        }
-      }
-    `;
-
-    // Add the printStyles to the <style> tag
-    const styleElement = document.createElement("style");
-    styleElement.innerHTML = printStyles;
-    document.head.appendChild(styleElement);
-  }, [printSize]);
-
-  const handlePrintSizeChange = () => {
-    const newSize = prompt("Digite o tamanho desejado para imprimir ex: 10cm 5cm");
-    setPrintSize(newSize);
-  };
-
   return (
     <>
-      <div className="main__content">
+    <div className='main_structure'>
 
-         <div className="printSizeParent">
+      <div className='topHead'>
+        {/* Logotipo */}
+        <button className="logotipo">
+        </button>
 
-          {/* Logotipo */}
-          <button className="logotipo">
-          </button>
-
-          {/* Title field */}
-          <div className="title printTitle">
-            <h2 className="title__h2">ETIQUETA DE ESTOQUE</h2>
-          </div>
-
-          {/* Change print size button */}
-          <button className="printSize"
-            onClick={handlePrintSizeChange}>
-            <MdSettings />
-          </button>
-
-         </div>
-
-        {/* Parent fields and QR Code */}
-        <div className="parent">
-          {/* Form fields */}
-          <div className="fields">
-            <EtiquetaForm
-              setDataOperacao={setDataOperacao}
-              setOPNumber={setOPNumber}
-              setNroGaiola={setNroGaiola}
-              setPesoGaiola={setPesoGaiola}
-              setPesoTotal={setPesoTotal}
-              setCodProduto={setCodProduto}
-              setPesoProduto={setPesoProduto}
-              calcularPesoLiquido={calcularPesoLiquido}
-              setFila={setFila}
-              setBloco={setBloco}
-              pesoLiquido={pesoLiquido}
-              quantidade={quantidade}
-            />
-          </div>
-
-          {/* QR Code Field */}
-          <div className="qrcode__field">
-            <QRCode key={qrCodeValue} value={qrCodeValue} className="qrcode" />
-          </div>
+        {/* Title field */}
+        <div className="title">
+          <h2 className="titleH2">ETIQUETA DE ESTOQUE</h2>
         </div>
+
       </div>
 
-      <div className="buttons">
+      <div className='iniFields'>
 
-        {/* Print button */}
-        <div className="printParent">
-          <div className="printButton">
-          
-            <button
-              className="print__btn"
-              onClick={handleSubmit}
-            >
-            <MdPrint /> Imprimir
-            </button>
-          </div>
+        <div className='data__grid'>
+          <label className='data__label'>Data:</label>
+          <button type="button" className="data__button" onClick={getCurrentDate}>Data Atual</button>
+          <input type="text" className="data__input" value={currentDate} onChange={(e) => setCurrentDate(e.target.value)} />
         </div>
 
-        {/* New download button */}
-        <div className="downloadButton">
-          <button className="download__btn" onClick={handleDownload}>
-            <MdCloudDownload /> Download
-          </button>
+        <div className='grid'>
+          <label>OP:</label>
+          <input type="text" value={op} onChange={(e) => setOp(e.target.value)} />
         </div>
+
+        <div className='grid'>
+          <label>Nº Gaiola:</label>
+          <input type="text" value={nroGaiola} onChange={(e) => setNroGaiola(e.target.value.slice(0, 20))} maxLength={20} />
+        </div>
+
+        <div className='grid'>
+          <label>Peso Gaiola:</label>
+          <input type="text" value={pesoGaiola} onChange={(e) => setPesoGaiola(e.target.value)} />
+        </div>
+
+        <div className='grid'>
+          <label>Peso Total:</label>
+          <input type="text" value={pesoTotal} onChange={(e) => setPesoTotal(e.target.value.slice(0, 20))} maxLength={20} />
+        </div>
+
+        <div className='grid'>
+          <label>Cod. Produto:</label>
+          <input type="text" value={codProduto} onChange={(e) => setCodProduto(e.target.value)} />
+        </div>
+
+        <div className='grid'>
+          <label>Peso do Produto:</label>
+          <input type="text" value={pesoProduto} onChange={(e) => setPesoProduto(e.target.value)} />
+        </div>
+
+        <div className='grid'>
+          <label>Fila:</label>
+          <input type="text" value={fila} onChange={(e) => setFila(e.target.value)} />
+        </div>
+
+        <div className='grid'>
+          <label>Bloco:</label>
+          <input type="text" value={bloco} onChange={(e) => setBloco(e.target.value)} />
+        </div>
+
+        <div className='grid'>
+          <label>Peso Líquido:</label>
+          <input type="number" readOnly value={pesoLiquido} onChange={(e) => setPesoLiquido(e.target.value)} />
+        </div>
+
+        <div className='grid'>
+          <label>Quantidade:</label>
+          <input type="number" readOnly value={quantidade} onChange={(e) => setQuantidade(e.target.value)} />
+        </div>
+
       </div>
+
+    </div>
+
+    <div className="bottom_buttons">
+      <div className='parentPrintBtn'>
+        <button className='printBtn' onClick={handleSubmit}><MdPrint /> Imprimir</button>
+      </div>  
+
+      {/* New download button */}
+      <div className="downloadButton">
+        <button className="download__btn" onClick={handleDownload}>
+          <MdCloudDownload /> Download
+        </button>
+      </div>
+    </div>
+
+    <div className='renderItemsToPrint'>{renderItemsToPrint()}</div>
     </>
   );
 }

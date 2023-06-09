@@ -45,6 +45,7 @@
     "css-loader": "^6.7.4",
     "style-loader": "^3.3.3",
     "webpack": "^5.84.1",
-    "webpack-cli": "^5.1.1"
+    "webpack-cli": "^5.1.1",
+    "webpack-encoding-plugin": "^0.3.1"
   }
 }

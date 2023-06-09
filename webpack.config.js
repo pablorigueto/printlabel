@@ -1,4 +1,5 @@
 const path = require('path');
+const EncodingPlugin = require('webpack-encoding-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -21,4 +22,10 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new EncodingPlugin({
+      encoding: 'utf-8',
+    }),
+  ],
 };
+
