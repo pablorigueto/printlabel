@@ -24,8 +24,7 @@ function App() {
     const year = now.getFullYear();
     const hours = now.getHours();
     const minutes = now.getMinutes();
-  
-    const formattedDate = `${day}/${month}/${year} ${hours}:${String(minutes).padStart(2, "0")}`;
+    const formattedDate = `${day}/${month}/${year}  -  ${hours}:${String(minutes).padStart(2, "0")}`;
     setCurrentDate(formattedDate);
   };
 
@@ -77,7 +76,7 @@ function App() {
     return (
       <div className='toPrint'>
         <div>
-          <div className="field"><label>Data:</label><span className="data"> {currentDate}</span></div>
+          <div className="field"><label>Data/Hora:</label><span className="data"> {currentDate}</span></div>
           <div className="field"><label>OP:</label><span className="op"> {op}</span></div>
           <div className="field"><label>Nº Gaiola:</label><span> {nroGaiola}</span></div>
           <div className="field"><label>Peso Gaiola:</label><span> {pesoGaiola}</span></div>
@@ -169,8 +168,8 @@ function App() {
       <div className='iniFields'>
 
         <div className='data__grid'>
-          <label className='data__label'>Data:</label>
-          <button type="button" className="data__button" onClick={getCurrentDate}>Data Atual</button>
+          <label className='data__label'>Data/Hora:</label>
+          <button type="button" className="data__button" onClick={getCurrentDate}>Atualizar</button>
           <input type="text" className="data__input" value={currentDate} onChange={(e) => setCurrentDate(e.target.value)} />
         </div>
 
