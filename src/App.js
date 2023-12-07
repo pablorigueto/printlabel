@@ -22,7 +22,10 @@ function App() {
     const day = String(now.getDate()).padStart(2, "0");
     const month = String(now.getMonth() + 1).padStart(2, "0");
     const year = now.getFullYear();
-    const formattedDate = `${day}/${month}/${year}`;
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+  
+    const formattedDate = `${day}/${month}/${year} ${hours}:${String(minutes).padStart(2, "0")}`;
     setCurrentDate(formattedDate);
   };
 
@@ -36,6 +39,10 @@ function App() {
     return { calculatedPesoLiquido, calculatedQuantidade };
   };
   
+  useEffect(() => {
+    getCurrentDate();
+  }, []);
+
   useEffect(() => {
     calcularPesoLiquido();
   }, [

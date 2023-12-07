@@ -1,7 +1,9 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const EncodingPlugin = require('webpack-encoding-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -23,9 +25,11 @@ module.exports = {
     ],
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: 'public/index.html', // specify your HTML template
+    }),
     new EncodingPlugin({
       encoding: 'utf-8',
     }),
   ],
 };
-

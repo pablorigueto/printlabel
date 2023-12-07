@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Biome';
-  src: url('../fonts/Biome-W01-Regular-1.ttf') format('truetype');
+  src: url('../media/Biome-W01-Regular-1.ttf') format('truetype');
 }
 
 body {
@@ -42,7 +42,7 @@ body {
   border: unset;
 }
 .logotipo {
-  background: url(../../assets/logotipo-small.png);
+  background: url(../media/assets/logotipo-small.png);
   border: none;
   background-repeat: no-repeat;
   margin-top: 14px;
